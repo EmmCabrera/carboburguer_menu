@@ -120,7 +120,7 @@ const MENU_DATA = [
         name: "Jumbodog Clásico",
         price: 100,
         desc: "Salchicha jumbo de primera, tocino, piña asada y queso fundido.",
-        img: "assets/jumbodog_jumbo.jpg",
+        img: "assets/jumbodog_jumbo.jpg?v=2",
         badge: "Favorito",
         type: "dog"
       },
@@ -129,7 +129,7 @@ const MENU_DATA = [
         name: "Jumbodog Pastor",
         price: 100,
         desc: "Salchicha jumbo con deliciosa carne al pastor, piña y queso.",
-        img: "assets/jumbodog_pastor.jpg",
+        img: "assets/jumbodog_pastor.jpg?v=2",
         type: "dog"
       },
       {
@@ -137,7 +137,7 @@ const MENU_DATA = [
         name: "Jumbodog Especial",
         price: 75,
         desc: "Salchicha selecta, tocino crocante, piña y queso.",
-        img: "assets/jumbodog_especial.jpg",
+        img: "assets/jumbodog_especial.jpg?v=2",
         type: "dog"
       },
       {
@@ -145,7 +145,7 @@ const MENU_DATA = [
         name: "Jumbodog Mixto",
         price: 130,
         desc: "Salchicha, pastor, tocino crocante, piña asada y doble queso.",
-        img: "assets/jumbodog_mixto.jpg",
+        img: "assets/jumbodog_mixto.jpg?v=2",
         badge: "⭐ El Más Cargado",
         type: "dog"
       }
@@ -381,32 +381,11 @@ const SABORES_FRAPPE = ["Café Clásico", "Moka", "Caramelo"];
 // 2. ESTADO GLOBAL DE LA APLICACIÓN
 // =============================================================================
 const state = {
-  cart: [],
   currentModalItem: null,
   activeSlide: 0,
   sliderTimer: null,
   whatsappPhone: "525544211895"
 };
-
-function loadCartFromStorage() {
-  try {
-    const saved = localStorage.getItem("carboburguer_cart");
-    if (saved) {
-      state.cart = JSON.parse(saved);
-      updateCartUI();
-    }
-  } catch (e) {
-    console.error("Error cargando carrito:", e);
-  }
-}
-
-function saveCartToStorage() {
-  try {
-    localStorage.setItem("carboburguer_cart", JSON.stringify(state.cart));
-  } catch (e) {
-    console.error("Error guardando carrito:", e);
-  }
-}
 
 // =============================================================================
 // 3. INICIALIZACIÓN
@@ -416,7 +395,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCategoryTabs();
   renderMenuSections();
   setupEventListeners();
-  loadCartFromStorage();
   setupScrollSpy();
 });
 
@@ -547,11 +525,6 @@ function renderMenuSections() {
     const cardsHtml = cat.items.map((item) => `
       <div class="glass-product-card" onclick="openProductModal('${item.id}')">
         <div class="flex-1 pr-2">
-          ${item.badge ? `
-            <span class="inline-block bg-[#ffda36] text-[#78350f] text-[10px] font-black px-2 py-0.5 rounded-md mb-1.5 uppercase tracking-wider shadow-sm border border-amber-300">
-              ${item.badge}
-            </span>
-          ` : ""}
           <h3 class="font-extrabold text-[#111827] text-sm sm:text-base tracking-wide uppercase leading-snug">
             ${item.name}
           </h3>
@@ -572,17 +545,12 @@ function renderMenuSections() {
 
     return `
       <section id="section-${cat.category}" class="mb-8 scroll-mt-28">
-        <div class="flex items-center justify-between mb-3.5 pb-2 border-b border-black/10">
-          <div>
-            <h2 class="text-base sm:text-lg font-black text-gray-950 uppercase tracking-wider flex items-center gap-2">
-              <i class="${cat.icon} text-gray-950"></i>
-              ${cat.categoryName}
-            </h2>
-            <p class="text-xs text-gray-800 font-medium mt-0.5">${cat.description}</p>
-          </div>
-          <span class="text-xs font-black text-gray-900 bg-white/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/50">
-            ${cat.items.length}
-          </span>
+        <div class="mb-3.5 pb-2 border-b border-black/10">
+          <h2 class="text-base sm:text-lg font-black text-gray-950 uppercase tracking-wider flex items-center gap-2">
+            <i class="${cat.icon} text-gray-950"></i>
+            ${cat.categoryName}
+          </h2>
+          <p class="text-xs text-gray-800 font-medium mt-0.5">${cat.description}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           ${cardsHtml}
@@ -638,445 +606,176 @@ function openProductModal(itemId) {
   const item = findItemById(itemId);
   if (!item) return;
 
-  state.currentModalItem = {
-    ...item,
-    quantity: 1,
-    selectedExtras: [],
-    selectedSalsa: SALSAS_DISPONIBLES[0],
-    selectedFlavor: "",
-    swapChampiñones: false,
-    notes: ""
-  };
-
   const modal = document.getElementById("product-modal");
   const modalImg = document.getElementById("modal-item-img");
   const modalTitle = document.getElementById("modal-item-title");
   const modalDesc = document.getElementById("modal-item-desc");
   const modalPrice = document.getElementById("modal-item-price");
-  const modalQty = document.getElementById("modal-qty-display");
   const optionsContainer = document.getElementById("modal-options-container");
 
-  modalImg.src = item.img;
-  modalTitle.textContent = item.name;
-  modalDesc.textContent = item.desc;
-  modalPrice.textContent = `$${item.price.toFixed(2)}`;
-  modalQty.textContent = "1";
+  if (modalImg) modalImg.src = item.img;
+  if (modalTitle) modalTitle.textContent = item.name;
+  if (modalDesc) modalDesc.textContent = item.desc;
+  if (modalPrice) modalPrice.textContent = `$${item.price.toFixed(2)}`;
 
   let optionsHtml = "";
 
   if (item.type === "burger") {
-    optionsHtml += `
-      <div class="mb-4">
-        <label class="block text-xs font-black text-gray-800 uppercase tracking-wider mb-2">
-          Personaliza tu Hamburguesa
-        </label>
-        <div class="space-y-2">
-          <label class="custom-option-label">
-            <div class="flex items-center gap-2.5">
-              <input type="checkbox" id="opt-doble" class="custom-option-input accent-[#f29b00] w-4 h-4 rounded" onchange="updateModalPrice()">
-              <span class="text-xs font-bold text-gray-900">Doble Carne a la Parrilla</span>
-            </div>
-            <span class="text-xs font-black text-[#b45309]">+$30.00</span>
-          </label>
-
-          <label class="custom-option-label">
-            <div class="flex items-center gap-2.5">
-              <input type="checkbox" id="opt-papas" class="custom-option-input accent-[#f29b00] w-4 h-4 rounded" onchange="updateModalPrice()">
-              <span class="text-xs font-bold text-gray-900">Porción de Papas Fritas</span>
-            </div>
-            <span class="text-xs font-black text-[#b45309]">+$30.00</span>
-          </label>
-
-          <label class="custom-option-label">
-            <div class="flex items-center gap-2.5">
-              <input type="checkbox" id="opt-champis" class="custom-option-input accent-[#f29b00] w-4 h-4 rounded" onchange="updateModalPrice()">
-              <div>
-                <span class="text-xs font-bold text-gray-900 block">Cambiar tocino y piña por Champiñones</span>
-                <span class="text-[10px] text-gray-600">Sin costo adicional</span>
-              </div>
-            </div>
-            <span class="text-xs font-black text-emerald-700">Gratis</span>
-          </label>
+    optionsHtml = `
+      <div class="space-y-3">
+        <div>
+          <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider mb-1">
+            Ingredientes
+          </h4>
+          <p class="text-xs text-gray-600 font-medium leading-relaxed">
+            ${item.desc}
+          </p>
+        </div>
+        <div class="bg-amber-50/90 border border-amber-200/80 rounded-xl p-3">
+          <h5 class="text-[11px] font-black text-amber-900 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-plus-circle text-[#b45309]"></i> Opciones disponibles al ordenar:
+          </h5>
+          <ul class="text-xs text-gray-700 space-y-1 font-medium">
+            <li class="flex items-center justify-between">
+              <span>• Doble Carne a la Parrilla</span>
+              <span class="font-bold text-[#b45309]">+$30.00</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span>• Porción de Papas Fritas</span>
+              <span class="font-bold text-[#b45309]">+$30.00</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span>• Cambiar tocino y piña por Champiñones</span>
+              <span class="font-bold text-emerald-700">Sin costo extra</span>
+            </li>
+          </ul>
         </div>
       </div>
     `;
   } else if (item.type === "dog") {
-    optionsHtml += `
-      <div class="mb-4">
-        <label class="block text-xs font-black text-gray-800 uppercase tracking-wider mb-2">
-          Personaliza tu Jumbodog
-        </label>
-        <div class="space-y-2">
-          <label class="custom-option-label">
-            <div class="flex items-center gap-2.5">
-              <input type="checkbox" id="opt-papas" class="custom-option-input accent-[#f29b00] w-4 h-4 rounded" onchange="updateModalPrice()">
-              <span class="text-xs font-bold text-gray-900">Porción de Papas Fritas</span>
-            </div>
-            <span class="text-xs font-black text-[#b45309]">+$30.00</span>
-          </label>
-          <label class="custom-option-label">
-            <div class="flex items-center gap-2.5">
-              <input type="checkbox" id="opt-sin-pina" class="custom-option-input accent-[#f29b00] w-4 h-4 rounded">
-              <span class="text-xs font-bold text-gray-900">Sin piña</span>
-            </div>
-          </label>
+    optionsHtml = `
+      <div class="space-y-3">
+        <div>
+          <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider mb-1">
+            Ingredientes
+          </h4>
+          <p class="text-xs text-gray-600 font-medium leading-relaxed">
+            ${item.desc}
+          </p>
+        </div>
+        <div class="bg-amber-50/90 border border-amber-200/80 rounded-xl p-3">
+          <h5 class="text-[11px] font-black text-amber-900 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-plus-circle text-[#b45309]"></i> Opciones disponibles al ordenar:
+          </h5>
+          <ul class="text-xs text-gray-700 space-y-1 font-medium">
+            <li class="flex items-center justify-between">
+              <span>• Porción de Papas Fritas</span>
+              <span class="font-bold text-[#b45309]">+$30.00</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span>• Sin piña</span>
+              <span class="font-bold text-gray-600">A petición</span>
+            </li>
+          </ul>
         </div>
       </div>
     `;
   } else if (item.type === "wings") {
-    optionsHtml += `
-      <div class="mb-4">
-        <div class="flex justify-between items-center mb-2">
-          <label class="text-xs font-black text-gray-800 uppercase tracking-wider">
-            Elige tu salsa <span class="text-[#b45309]">*</span>
-          </label>
-          <span class="text-[10px] bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-black">1 obligatoria</span>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          ${SALSAS_DISPONIBLES.map((salsa, i) => `
-            <label class="custom-option-label py-2.5">
-              <div class="flex items-center gap-2">
-                <input type="radio" name="salsa-option" value="${salsa}" ${i === 0 ? 'checked' : ''} class="accent-[#f29b00]">
-                <span class="text-xs font-bold text-gray-900">${salsa}</span>
-              </div>
-            </label>
-          `).join("")}
+    optionsHtml = `
+      <div class="space-y-3">
+        <div>
+          <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider mb-2">
+            Salsas a elegir
+          </h4>
+          <div class="flex flex-wrap gap-1.5">
+            ${SALSAS_DISPONIBLES.map(salsa => `
+              <span class="text-xs bg-gray-100 text-gray-800 font-bold px-2.5 py-1 rounded-lg border border-gray-200">
+                ${salsa}
+              </span>
+            `).join("")}
+          </div>
         </div>
       </div>
     `;
   } else if (item.type === "drink-flavor") {
     let flavors = SABORES_MALTEADA;
-    let labelText = "Elige el sabor de tu malteada";
+    let labelText = "Sabores de malteada";
     if (item.id === "be-refresco") {
       flavors = SABORES_REFRESCO;
-      labelText = "Elige tu refresco";
+      labelText = "Variedades de refresco";
     } else if (item.id === "be-agua") {
       flavors = SABORES_AGUA;
-      labelText = "Elige el sabor del agua";
+      labelText = "Sabores de agua del día";
     } else if (item.id === "be-frappe") {
       flavors = SABORES_FRAPPE;
-      labelText = "Elige el sabor de tu frappé";
+      labelText = "Sabores de frappé";
     }
 
-    optionsHtml += `
-      <div class="mb-4">
-        <label class="block text-xs font-black text-gray-800 uppercase tracking-wider mb-2">
-          ${labelText}
-        </label>
-        <div class="grid grid-cols-2 gap-2">
-          ${flavors.map((flavor, i) => `
-            <label class="custom-option-label py-2.5">
-              <div class="flex items-center gap-2">
-                <input type="radio" name="flavor-option" value="${flavor}" ${i === 0 ? 'checked' : ''} class="accent-[#f29b00]">
-                <span class="text-xs font-bold text-gray-900">${flavor}</span>
-              </div>
-            </label>
-          `).join("")}
+    optionsHtml = `
+      <div class="space-y-3">
+        <div>
+          <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider mb-2">
+            ${labelText}
+          </h4>
+          <div class="flex flex-wrap gap-1.5">
+            ${flavors.map(flavor => `
+              <span class="text-xs bg-gray-100 text-gray-800 font-bold px-2.5 py-1 rounded-lg border border-gray-200">
+                ${flavor}
+              </span>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    optionsHtml = `
+      <div class="space-y-3">
+        <div>
+          <h4 class="text-xs font-black text-gray-800 uppercase tracking-wider mb-1">
+            Descripción
+          </h4>
+          <p class="text-xs text-gray-600 font-medium leading-relaxed">
+            ${item.desc}
+          </p>
         </div>
       </div>
     `;
   }
 
+  // Nota de servicio a domicilio en el modal
   optionsHtml += `
-    <div class="mt-4">
-      <label class="block text-xs font-black text-gray-800 uppercase tracking-wider mb-1.5">
-        Instrucciones para la cocina (opcional)
-      </label>
-      <input type="text" id="modal-item-notes" placeholder="Ej: sin cebolla, salsa aparte, bien dorada..." 
-             class="w-full text-xs p-3 border border-gray-300 rounded-xl focus:border-[#f29b00] focus:ring-1 focus:ring-[#f29b00] outline-none bg-white">
+    <div class="mt-4 p-3 bg-amber-500/10 rounded-xl border border-amber-500/20 text-xs text-amber-950 flex items-center gap-2 font-semibold">
+      <i class="fa-solid fa-motorcycle text-[#b45309] text-sm"></i>
+      <span>El servicio a domicilio tiene un costo extra • Sujeto a disponibilidad</span>
     </div>
   `;
 
-  optionsContainer.innerHTML = optionsHtml;
-  updateModalPrice();
+  if (optionsContainer) {
+    optionsContainer.innerHTML = optionsHtml;
+  }
 
   modal.classList.add("active");
-  document.getElementById("modal-backdrop").classList.add("active");
+  const backdrop = document.getElementById("modal-backdrop");
+  if (backdrop) backdrop.classList.add("active");
   document.body.style.overflow = "hidden";
 }
 
 function closeProductModal() {
   const modal = document.getElementById("product-modal");
-  modal.classList.remove("active");
-  document.getElementById("modal-backdrop").classList.remove("active");
-  document.body.style.overflow = "";
-  state.currentModalItem = null;
-}
-
-function changeModalQty(delta) {
-  if (!state.currentModalItem) return;
-  const newQty = state.currentModalItem.quantity + delta;
-  if (newQty >= 1 && newQty <= 20) {
-    state.currentModalItem.quantity = newQty;
-    document.getElementById("modal-qty-display").textContent = newQty;
-    updateModalPrice();
-  }
-}
-
-function updateModalPrice() {
-  if (!state.currentModalItem) return;
-
-  let unitPrice = state.currentModalItem.price;
-
-  const dobleCheck = document.getElementById("opt-doble");
-  if (dobleCheck && dobleCheck.checked) unitPrice += 30;
-
-  const papasCheck = document.getElementById("opt-papas");
-  if (papasCheck && papasCheck.checked) unitPrice += 30;
-
-  const total = unitPrice * state.currentModalItem.quantity;
-  const btn = document.getElementById("modal-add-btn");
-  if (btn) {
-    btn.innerHTML = `
-      <div class="flex items-center justify-between w-full px-2">
-        <span>Agregar al pedido</span>
-        <span class="font-black text-[#ffda36]">$${total.toFixed(2)}</span>
-      </div>
-    `;
-  }
-}
-
-function addCurrentItemToCart() {
-  if (!state.currentModalItem) return;
-
-  const item = state.currentModalItem;
-  let finalUnitPrice = item.price;
-  const customizations = [];
-
-  const dobleCheck = document.getElementById("opt-doble");
-  if (dobleCheck && dobleCheck.checked) {
-    finalUnitPrice += 30;
-    customizations.push("Doble carne (+$30)");
-  }
-
-  const papasCheck = document.getElementById("opt-papas");
-  if (papasCheck && papasCheck.checked) {
-    finalUnitPrice += 30;
-    customizations.push("Porción papas (+$30)");
-  }
-
-  const champisCheck = document.getElementById("opt-champis");
-  if (champisCheck && champisCheck.checked) {
-    customizations.push("Con champiñones (sin piña ni tocino)");
-  }
-
-  const sinPinaCheck = document.getElementById("opt-sin-pina");
-  if (sinPinaCheck && sinPinaCheck.checked) {
-    customizations.push("Sin piña");
-  }
-
-  const salsaRadio = document.querySelector('input[name="salsa-option"]:checked');
-  if (salsaRadio) {
-    customizations.push(`Salsa: ${salsaRadio.value}`);
-  }
-
-  const flavorRadio = document.querySelector('input[name="flavor-option"]:checked');
-  if (flavorRadio) {
-    customizations.push(`Sabor: ${flavorRadio.value}`);
-  }
-
-  const notesInput = document.getElementById("modal-item-notes");
-  const notes = notesInput ? notesInput.value.trim() : "";
-  if (notes) {
-    customizations.push(`Nota: "${notes}"`);
-  }
-
-  const cartItemKey = `${item.id}-${customizations.sort().join("|")}`;
-
-  const existingIndex = state.cart.findIndex(ci => ci.key === cartItemKey);
-  if (existingIndex > -1) {
-    state.cart[existingIndex].quantity += item.quantity;
-  } else {
-    state.cart.push({
-      key: cartItemKey,
-      id: item.id,
-      name: item.name,
-      price: finalUnitPrice,
-      basePrice: item.price,
-      quantity: item.quantity,
-      img: item.img,
-      customizations
-    });
-  }
-
-  saveCartToStorage();
-  updateCartUI();
-  closeProductModal();
-  showToast(`¡${item.name} agregado al pedido!`);
-}
-
-// =============================================================================
-// 7. CARRITO DE COMPRAS Y PEDIDOS
-// =============================================================================
-function updateCartUI() {
-  const totalItems = state.cart.reduce((sum, it) => sum + it.quantity, 0);
-  const total = state.cart.reduce((sum, it) => sum + (it.price * it.quantity), 0);
-
-  const floatingBar = document.getElementById("floating-order-bar");
-  const floatingBadge = document.getElementById("floating-cart-count");
-  const floatingTotal = document.getElementById("floating-cart-total");
-
-  if (floatingBar && floatingBadge && floatingTotal) {
-    if (totalItems > 0) {
-      floatingBar.classList.add("visible");
-      floatingBadge.textContent = `${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}`;
-      floatingTotal.textContent = `$${total.toFixed(2)}`;
-    } else {
-      floatingBar.classList.remove("visible");
-    }
-  }
-
-  renderCartDrawer(total);
-}
-
-function renderCartDrawer(total) {
-  const container = document.getElementById("cart-items-list");
-  if (!container) return;
-
-  if (state.cart.length === 0) {
-    container.innerHTML = `
-      <div class="text-center py-12 px-4">
-        <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-3">
-          <i class="fa-solid fa-basket-shopping text-2xl text-[#b45309]"></i>
-        </div>
-        <h4 class="font-black text-gray-800 text-sm">Tu canasta está vacía</h4>
-        <p class="text-xs text-gray-600 mt-1 max-w-xs mx-auto">
-          Explora nuestras hamburguesas al carbón, jumbodogs y malteadas y agrégalos aquí.
-        </p>
-      </div>
-    `;
-    const checkoutBtn = document.getElementById("cart-checkout-btn");
-    if (checkoutBtn) checkoutBtn.disabled = true;
-    return;
-  }
-
-  const checkoutBtn = document.getElementById("cart-checkout-btn");
-  if (checkoutBtn) checkoutBtn.disabled = false;
-
-  container.innerHTML = state.cart.map((it, idx) => `
-    <div class="p-3.5 bg-gray-50/90 rounded-2xl border border-gray-200 flex items-start justify-between gap-3">
-      <div class="flex-1">
-        <div class="flex items-center justify-between">
-          <h4 class="font-black text-xs text-gray-900 uppercase">${it.name}</h4>
-          <span class="font-black text-xs text-[#b45309]">$${(it.price * it.quantity).toFixed(2)}</span>
-        </div>
-        ${it.customizations.length > 0 ? `
-          <ul class="text-[11px] text-gray-600 mt-1 space-y-0.5">
-            ${it.customizations.map(c => `<li>• ${c}</li>`).join("")}
-          </ul>
-        ` : ""}
-        <div class="flex items-center gap-3 mt-2.5">
-          <div class="flex items-center border border-gray-300 rounded-lg bg-white overflow-hidden">
-            <button onclick="changeCartItemQty(${idx}, -1)" class="w-7 h-7 text-xs font-bold text-gray-700 hover:bg-gray-100 flex items-center justify-center">
-              ${it.quantity === 1 ? '<i class="fa-solid fa-trash text-[10px] text-red-500"></i>' : '-'}
-            </button>
-            <span class="w-7 text-center font-black text-xs text-gray-900">${it.quantity}</span>
-            <button onclick="changeCartItemQty(${idx}, 1)" class="w-7 h-7 text-xs font-bold text-gray-700 hover:bg-gray-100 flex items-center justify-center">+</button>
-          </div>
-          <span class="text-[10px] text-gray-500">c/u $${it.price.toFixed(2)}</span>
-        </div>
-      </div>
-    </div>
-  `).join("");
-
-  document.getElementById("cart-summary-total").textContent = `$${total.toFixed(2)}`;
-}
-
-function changeCartItemQty(index, delta) {
-  if (state.cart[index]) {
-    const newQty = state.cart[index].quantity + delta;
-    if (newQty <= 0) {
-      state.cart.splice(index, 1);
-    } else {
-      state.cart[index].quantity = newQty;
-    }
-    saveCartToStorage();
-    updateCartUI();
-  }
-}
-
-function clearCart() {
-  if (confirm("¿Deseas vaciar todos los productos de tu pedido?")) {
-    state.cart = [];
-    saveCartToStorage();
-    updateCartUI();
-  }
-}
-
-function openCartDrawer() {
-  const drawer = document.getElementById("cart-drawer");
-  drawer.classList.add("active");
-  document.getElementById("modal-backdrop").classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-function closeCartDrawer() {
-  const drawer = document.getElementById("cart-drawer");
-  drawer.classList.remove("active");
-  document.getElementById("modal-backdrop").classList.remove("active");
+  if (modal) modal.classList.remove("active");
+  const backdrop = document.getElementById("modal-backdrop");
+  if (backdrop) backdrop.classList.remove("active");
   document.body.style.overflow = "";
 }
 
 // =============================================================================
-// 8. GENERACIÓN DE MENSAJE Y ENVÍO POR WHATSAPP
-// =============================================================================
-function sendOrderToWhatsApp() {
-  if (state.cart.length === 0) return;
-
-  const nameInput = document.getElementById("checkout-name");
-  const phoneInput = document.getElementById("checkout-phone");
-  const addressInput = document.getElementById("checkout-address");
-  const paymentSelect = document.getElementById("checkout-payment");
-
-  const name = nameInput ? nameInput.value.trim() : "";
-  const phone = phoneInput ? phoneInput.value.trim() : "";
-  const address = addressInput ? addressInput.value.trim() : "";
-  const payment = paymentSelect ? paymentSelect.value : "Efectivo";
-
-  if (!name) {
-    alert("Por favor ingresa tu nombre para el pedido.");
-    if (nameInput) nameInput.focus();
-    return;
-  }
-
-  const total = state.cart.reduce((sum, it) => sum + (it.price * it.quantity), 0);
-
-  let msg = `🍔 *NUEVO PEDIDO - CARBOBURGUER* 🍔\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `👤 *Cliente:* ${name}\n`;
-  if (phone) msg += `📞 *Teléfono:* ${phone}\n`;
-  if (address) msg += `📍 *Dirección / Entrega:* ${address}\n`;
-  msg += `💵 *Forma de Pago:* ${payment}\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
-  msg += `📋 *DETALLE DEL PEDIDO:*\n`;
-
-  state.cart.forEach((it) => {
-    msg += `\n▪️ *${it.quantity}x ${it.name}* ($${(it.price * it.quantity).toFixed(2)})\n`;
-    if (it.customizations && it.customizations.length > 0) {
-      it.customizations.forEach(c => {
-        msg += `   └ ${c}\n`;
-      });
-    }
-  });
-
-  msg += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `*TOTAL A PAGAR:* $${total.toFixed(2)} MXN\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `💬 _Enviado desde el Menú Digital Carboburguer_`;
-
-  const encodedMsg = encodeURIComponent(msg);
-  const whatsappUrl = `https://wa.me/${state.whatsappPhone}?text=${encodedMsg}`;
-
-  window.open(whatsappUrl, "_blank");
-}
-
-// =============================================================================
-// 9. MODAL DE INFORMACIÓN DE LA EMPRESA ("VER MÁS")
+// 7. MODAL DE INFORMACIÓN DE LA EMPRESA
 // =============================================================================
 function openStoreInfoModal() {
   const modal = document.getElementById("store-info-modal");
-  modal.classList.add("active");
-  document.getElementById("modal-backdrop").classList.add("active");
+  if (modal) modal.classList.add("active");
+  const backdrop = document.getElementById("modal-backdrop");
+  if (backdrop) backdrop.classList.add("active");
   document.body.style.overflow = "hidden";
 }
 
@@ -1115,7 +814,6 @@ function setupEventListeners() {
   if (backdrop) {
     backdrop.addEventListener("click", () => {
       closeProductModal();
-      closeCartDrawer();
       closeStoreInfoModal();
     });
   }
@@ -1123,7 +821,6 @@ function setupEventListeners() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeProductModal();
-      closeCartDrawer();
       closeStoreInfoModal();
     }
   });

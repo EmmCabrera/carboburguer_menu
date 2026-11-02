@@ -166,64 +166,32 @@
   <main class="w-full max-w-4xl mx-auto px-4 sm:px-6 relative z-20 pt-4 sm:pt-6 flex-1">
 
     <!-- =========================================================================
-         APARTADO OFICIAL DE PROMOS: PROMO 3x2 (MIÉRCOLES Y JUEVES)
-         Diseño limpio, claro y fácil de entender
+         APARTADO DE PROMOS: PROMO 3x2 (MIÉRCOLES Y JUEVES)
+         Diseño editorial limpio, directo y profesional
          ========================================================================= -->
-    <div class="glass-card-dark p-4 sm:p-5 mb-5 text-white shadow-2xl border border-amber-400/35 relative overflow-hidden">
-      <!-- Glow ambiental suave -->
-      <div class="absolute -top-10 -right-10 w-44 h-44 bg-[#f29b00]/20 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        
-        <!-- Bloque informativo de la Promo 3x2 -->
-        <div class="flex-1">
-          
-          <!-- Píldora de días -->
-          <div class="inline-flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-amber-600 text-white text-[11px] font-black uppercase px-3 py-1 rounded-full tracking-wider shadow-sm mb-2.5">
-            <i class="fa-solid fa-fire text-yellow-300"></i> MIÉRCOLES Y JUEVES
-          </div>
-
-          <!-- Titular 3*2 claro y directo -->
-          <div class="flex items-center gap-3">
-            <span class="text-4xl sm:text-5xl font-black text-[#ffda36] tracking-tight leading-none drop-shadow">
-              3 * 2
+    <div class="bg-[#18181b] rounded-2xl p-4 sm:p-5 mb-5 shadow-xl border border-black/20 text-white">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="bg-[#f29b00] text-gray-950 text-[11px] font-black uppercase px-2.5 py-0.5 rounded-md tracking-wider">
+              Miércoles y Jueves
             </span>
-            <div>
-              <h3 class="text-base sm:text-lg font-black uppercase text-white leading-tight">
-                Pagas 2 y te llevas 3
-              </h3>
-              <p class="text-xs text-amber-200/90 font-medium">Aplica en los siguientes productos:</p>
-            </div>
-          </div>
-
-          <!-- Productos participantes organizados en píldoras visuales -->
-          <div class="mt-3 flex flex-wrap gap-2 text-xs font-bold text-gray-200">
-            <span class="bg-white/10 border border-white/15 px-3 py-1.5 rounded-xl flex items-center gap-2">
-              🍔 Hamburguesa de Arrachera y Pollo
-            </span>
-            <span class="bg-white/10 border border-white/15 px-3 py-1.5 rounded-xl flex items-center gap-2">
-              🌭 Hot Dog Jumbo
-            </span>
-            <span class="bg-white/10 border border-white/15 px-3 py-1.5 rounded-xl flex items-center gap-2">
-              🍗 Alitas y Boneless
+            <span class="text-xs font-bold text-gray-400">
+              Promo Semanal
             </span>
           </div>
-
+          <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+            Promo <span class="text-[#f29b00]">3×2</span>
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-300 font-medium mt-1">
+            Pagas 2 y te llevas 3 en Hamburguesas de arrachera y pollo, Hot Dog Jumbo, Alitas y Boneless.
+          </p>
         </div>
 
-        <!-- Botón directo para pedir la promo por WhatsApp -->
-        <div class="sm:flex-shrink-0">
-          <a 
-            href="https://wa.me/525544211895?text=¡Hola%20Carboburguer!%20Quiero%20pedir%20la%20Promo%203x2%20de%20Miércoles%20y%20Jueves" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="w-full sm:w-auto bg-[#25D366] hover:bg-[#1ebd5a] active:scale-95 text-white text-xs sm:text-sm font-black px-5 py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all"
-          >
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-            <span>Pedir Promo 3x2</span>
-          </a>
+        <div class="hidden sm:flex flex-col items-center justify-center bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-center flex-shrink-0">
+          <span class="text-2xl font-black text-[#f29b00] leading-none">3×2</span>
+          <span class="text-[10px] font-bold text-gray-300 uppercase tracking-wider mt-0.5">Carboburguer</span>
         </div>
-
       </div>
     </div>
 
@@ -243,11 +211,15 @@
       <!-- Renderizado dinámico vía app.js -->
     </div>
 
-    <!-- =========================================================================
-         5. PIE DE PÁGINA GLASSMORFISMO CON INFORMACIÓN DE LA EMPRESA & HORARIOS
-         ========================================================================= -->
-    <footer class="mt-8 mb-12 p-6 glass-card text-center">
-      <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#b45309] mx-auto mb-2.5 shadow-md bg-[#141414]">
+    </main>
+
+  <!-- =========================================================================
+       5. PIE DE PÁGINA OFICIAL (INTEGRADO FULL-WIDTH, NO COMO TARJETA)
+       ========================================================================= -->
+  <footer class="w-full bg-[#141416] text-white mt-16 pt-10 pb-16 px-4 sm:px-8 border-t-2 border-[#f29b00]/30 shadow-2xl relative z-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Avatar circular -->
+      <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#f29b00] mx-auto mb-3 shadow-lg bg-[#141414]">
         <img src="assets/logo_circle.png" alt="Carboburguer" class="w-full h-full object-cover">
       </div>
       
@@ -255,32 +227,33 @@
       <h3 class="carbo-script-title text-2xl sm:text-3xl">
         Carboburguer
       </h3>
-      <p class="text-xs text-gray-800 font-bold max-w-sm mx-auto mt-1 italic">
-        "Carboburguer somos tu mejor opción. Ven y compruébalo."
+      <p class="text-xs text-amber-300 font-bold max-w-sm mx-auto mt-1 italic tracking-wide">
+        "Deliciosamente adictivas"
       </p>
       
       <!-- Horarios y Contacto oficial en el pie -->
-      <div class="flex flex-wrap items-center justify-center gap-4 mt-4 pt-4 border-t border-black/10 text-xs font-bold text-gray-900">
-        <span class="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full border border-white/60 shadow-sm">
-          <i class="fa-solid fa-clock text-[#b45309]"></i> 15:00 a 22:00 hrs
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-5 pt-5 border-t border-white/10 text-xs font-bold text-gray-200">
+        <span class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/15 shadow-sm backdrop-blur-md">
+          <i class="fa-solid fa-clock text-[#ffda36]"></i> 15:00 a 22:00 hrs
         </span>
-        <span class="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full border border-white/60 shadow-sm">
-          <i class="fa-brands fa-whatsapp text-emerald-600 font-black"></i> 55 • 4421 • 1895
-        </span>
-        <span class="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full border border-white/60 shadow-sm">
-          <i class="fa-solid fa-shield-halved text-[#b45309]"></i> Desde 2012
-        </span>
+        <a href="https://wa.me/525544211895" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-full border border-white/15 shadow-sm transition-all backdrop-blur-md">
+          <i class="fa-brands fa-whatsapp text-emerald-400 font-black"></i> 55 • 4421 • 1895
+        </a>
       </div>
 
-      <div class="mt-4">
-        <button onclick="openStoreInfoModal()" class="inline-flex items-center gap-2 bg-white/80 hover:bg-white text-gray-900 text-xs font-black px-4 py-2 rounded-xl border border-white/60 shadow-sm transition-all">
-          <i class="fa-solid fa-circle-info text-[#b45309]"></i>
-          <span>Información de la empresa & promociones</span>
-        </button>
+      <!-- Leyenda oficial de servicio a domicilio -->
+      <div class="mt-4 pt-4 border-t border-white/10">
+        <div class="inline-flex items-center gap-2 bg-[#f29b00]/15 border border-[#f29b00]/35 px-4 py-2 rounded-xl text-xs font-bold text-amber-200 shadow-sm">
+          <i class="fa-solid fa-motorcycle text-[#ffda36] text-sm"></i>
+          <span>El servicio a domicilio tiene un costo extra • Sujeto a disponibilidad</span>
+        </div>
       </div>
-    </footer>
 
-  </main>
+      <div class="mt-6 text-[11px] text-gray-400 font-medium">
+        © 2026 Carboburguer · Sabor a la brasa desde 2012 · Menú Digital
+      </div>
+    </div>
+  </footer>
 
   <!-- =========================================================================
        6. BOTÓN FLOTANTE REDONDO DE WHATSAPP (CON ONDA PULSANTE)
@@ -297,51 +270,20 @@
   </a>
 
   <!-- =========================================================================
-       7. BARRA FLOTANTE DE PEDIDO (COLIN'S STYLE INFERIOR GLASSMORFICA)
+       7. BACKDROP GLOBAL PARA MODAL DE FOTO Y DETALLE
        ========================================================================= -->
-  <div id="floating-order-bar" class="floating-order-bar">
-    <div class="glass-card-dark text-white p-3.5 shadow-2xl flex items-center justify-between gap-3 cursor-pointer hover:bg-black transition-all" onclick="openCartDrawer()">
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-[#ffda36] text-gray-950 font-black flex items-center justify-center text-sm shadow-md">
-          <i class="fa-solid fa-basket-shopping"></i>
-        </div>
-        <div>
-          <span id="floating-cart-count" class="text-xs font-bold block text-gray-200 leading-tight">
-            0 productos
-          </span>
-          <span class="text-[10px] text-[#ffda36] font-bold tracking-wide">
-            Toca para ver orden
-          </span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2.5">
-        <span id="floating-cart-total" class="font-black text-base text-[#ffda36]">
-          $0.00
-        </span>
-        <span class="bg-[#ffda36] text-gray-950 text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md">
-          <span>Ver pedido</span>
-          <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </span>
-      </div>
-    </div>
-  </div>
+  <div id="modal-backdrop" class="modal-backdrop fixed inset-0 bg-black/60 backdrop-blur-sm z-50" onclick="closeProductModal()"></div>
 
   <!-- =========================================================================
-       8. BACKDROP GLOBAL PARA MODALES Y DRAWERS
-       ========================================================================= -->
-  <div id="modal-backdrop" class="modal-backdrop fixed inset-0 bg-black/60 backdrop-blur-sm z-50"></div>
-
-  <!-- =========================================================================
-       9. MODAL DE PERSONALIZACIÓN DE PRODUCTO
+       8. MODAL DE VISTA PREVIA DE PRODUCTO Y FOTO (SOLO INFORMATIVO)
        ========================================================================= -->
   <div id="product-modal" class="modal-sheet fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-lg bg-white rounded-t-3xl md:rounded-3xl shadow-2xl z-50 max-h-[90vh] flex flex-col overflow-hidden">
     
-    <div class="relative h-48 sm:h-56 w-full flex-shrink-0 bg-gray-950">
+    <div class="relative h-56 sm:h-64 w-full flex-shrink-0 bg-gray-950">
       <img id="modal-item-img" src="assets/carbo_burguer.jpg" alt="Producto" class="w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30"></div>
       
-      <button onclick="closeProductModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center hover:bg-black transition-colors">
+      <button onclick="closeProductModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center hover:bg-black transition-colors" aria-label="Cerrar vista previa">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
@@ -368,104 +310,14 @@
       </div>
     </div>
 
-    <div class="p-4 bg-gray-50 border-t border-gray-200 flex items-center gap-3">
-      <div class="flex items-center border border-gray-300 rounded-xl bg-white overflow-hidden shadow-sm">
-        <button onclick="changeModalQty(-1)" class="w-10 h-10 flex items-center justify-center text-sm font-bold text-gray-700 hover:bg-gray-100 active:bg-gray-200">
-          -
-        </button>
-        <span id="modal-qty-display" class="w-9 text-center font-black text-sm text-gray-900">
-          1
-        </span>
-        <button onclick="changeModalQty(1)" class="w-10 h-10 flex items-center justify-center text-sm font-bold text-gray-700 hover:bg-gray-100 active:bg-gray-200">
-          +
-        </button>
+    <div class="p-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2 text-gray-600 text-xs font-semibold">
+        <i class="fa-solid fa-motorcycle text-[#b45309]"></i>
+        <span class="text-[11px] sm:text-xs">Servicio a domicilio disponible</span>
       </div>
-
-      <button id="modal-add-btn" onclick="addCurrentItemToCart()" class="flex-1 bg-gray-950 hover:bg-black active:scale-[0.98] text-[#ffda36] font-black py-3 px-4 rounded-xl shadow-md transition-all text-xs sm:text-sm">
-        Agregar al pedido • $150.00
+      <button onclick="closeProductModal()" class="bg-gray-950 hover:bg-black text-[#ffda36] font-bold px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
+        Cerrar
       </button>
-    </div>
-
-  </div>
-
-  <!-- =========================================================================
-       10. DRAWER DEL CARRITO & CHECKOUT DIRECTO POR WHATSAPP
-       ========================================================================= -->
-  <div id="cart-drawer" class="modal-sheet fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-lg bg-white rounded-t-3xl md:rounded-3xl shadow-2xl z-50 max-h-[92vh] flex flex-col overflow-hidden">
-    
-    <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between bg-white">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-amber-100 text-[#b45309] flex items-center justify-center text-sm">
-          <i class="fa-solid fa-basket-shopping"></i>
-        </div>
-        <div>
-          <h3 class="font-black text-sm uppercase tracking-wide text-gray-900">Tu Pedido</h3>
-          <span class="text-[11px] text-[#b45309] font-bold">Carboburguer WhatsApp Directo</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="clearCart()" title="Vaciar carrito" class="text-xs text-gray-400 hover:text-red-500 font-semibold p-1.5">
-          <i class="fa-solid fa-trash-can mr-1"></i> Vaciar
-        </button>
-        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 flex items-center justify-center">
-          <i class="fa-solid fa-xmark text-sm"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="p-4 sm:p-5 overflow-y-auto flex-1 space-y-3">
-      <div id="cart-items-list" class="space-y-2.5">
-        <!-- Renderizado dinámico vía app.js -->
-      </div>
-
-      <div class="pt-4 mt-4 border-t border-gray-100">
-        <h4 class="text-xs font-black uppercase tracking-wider text-gray-800 mb-2.5 flex items-center gap-1.5">
-          <i class="fa-solid fa-user text-[#b45309]"></i> Datos del Pedido
-        </h4>
-        
-        <div class="space-y-2.5">
-          <div>
-            <label class="block text-[11px] font-bold text-gray-700 mb-1">Nombre completo *</label>
-            <input type="text" id="checkout-name" placeholder="Tu nombre" class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f29b00] outline-none">
-          </div>
-
-          <div>
-            <label class="block text-[11px] font-bold text-gray-700 mb-1">Teléfono WhatsApp</label>
-            <input type="tel" id="checkout-phone" placeholder="Ej: 55 1234 5678" class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f2ad00] outline-none">
-          </div>
-
-          <div>
-            <label class="block text-[11px] font-bold text-gray-700 mb-1">Dirección de entrega o notas (opcional)</label>
-            <textarea id="checkout-address" rows="2" placeholder="Dirección para entrega o detalles del pedido..." class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f2ad00] outline-none"></textarea>
-          </div>
-
-          <div>
-            <label class="block text-[11px] font-bold text-gray-700 mb-1">Forma de pago</label>
-            <select id="checkout-payment" class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f2ad00] outline-none bg-white">
-              <option value="Efectivo">Efectivo</option>
-              <option value="Transferencia electrónica">Transferencia electrónica</option>
-              <option value="Tarjeta (Terminal)">Tarjeta</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="p-4 bg-gray-50 border-t border-gray-200">
-      <div class="flex justify-between text-sm mb-3 font-black text-gray-950">
-        <span>TOTAL A PAGAR:</span>
-        <span id="cart-summary-total" class="text-base text-[#b45309] font-black">$0.00</span>
-      </div>
-
-      <button id="cart-checkout-btn" onclick="sendOrderToWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#1ebd5a] active:scale-[0.98] text-white font-black py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-xs sm:text-sm">
-        <i class="fa-brands fa-whatsapp text-lg"></i>
-        <span>Enviar Pedido por WhatsApp</span>
-      </button>
-      <p class="text-[10px] text-gray-500 text-center mt-1.5 font-medium">
-        Se abrirá tu WhatsApp con el detalle listo para enviar a Carboburguer.
-      </p>
     </div>
 
   </div>
