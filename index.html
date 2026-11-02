@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Carboburguer | Menú Digital Oficial</title>
+  <meta name="description" content="Menú digital oficial de Carboburguer. Hamburguesas al carbón, jumbodogs gourmet, malteadas y alitas con el auténtico sabor a la brasa. Desde 2012.">
+  <link rel="icon" type="image/png" href="assets/logo_circle.png">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            carbo: {
+              primary: '#f29b00',
+              hover: '#d98700',
+              dark: '#121212',
+              charcoal: '#1c1c1c',
+              gold: '#ffda36',
+              rust: '#b45309'
+            }
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'system-ui', 'sans-serif'],
+            script: ['Pacifico', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Montserrat & Pacifico (Tipografía fiel al rótulo Carboburguer) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos propios (Glassmorfismo, Ken Burns y Botón WhatsApp) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-[#1a1a1a] min-h-screen flex flex-col antialiased selection:bg-[#121212] selection:text-[#ffda36] pb-24">
+
+  <!-- =========================================================================
+       1. HERO HEADER DINÁMICO (SLIDESHOW CON MOVIMIENTO KEN BURNS)
+       Hamburguesa -> Hotdog -> Malteadas -> Alitas -> Hamburguesa
+       ========================================================================= -->
+  <header class="relative w-full">
+    <div class="hero-slider-container">
+      
+      <!-- Slide 1: Hamburguesa -->
+      <div class="hero-slide active" data-index="0">
+        <img src="assets/hero_burger.jpg" alt="Hamburguesas al carbón" class="slide-image">
+        <div class="hero-gradient-overlay"></div>
+        <div class="absolute bottom-12 sm:bottom-16 left-4 sm:left-8 z-10 text-white max-w-md">
+          <span class="inline-flex items-center gap-1.5 bg-[#ffda36] text-gray-950 text-[10px] sm:text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-2 tracking-wider shadow-md">
+            <i class="fa-solid fa-fire text-amber-600"></i> 100% Al Carbón
+          </span>
+          <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide leading-tight drop-shadow-md">
+            Hamburguesas a la Brasa
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-200 mt-1 font-medium drop-shadow line-clamp-1">
+            Arrachera, sirloin, pastor y triple carne
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 2: Hotdog / Jumbodog -->
+      <div class="hero-slide" data-index="1">
+        <img src="assets/hero_hotdog.jpg" alt="Jumbodogs Gourmet" class="slide-image">
+        <div class="hero-gradient-overlay"></div>
+        <div class="absolute bottom-12 sm:bottom-16 left-4 sm:left-8 z-10 text-white max-w-md">
+          <span class="inline-flex items-center gap-1.5 bg-[#ffda36] text-gray-950 text-[10px] sm:text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-2 tracking-wider shadow-md">
+            <i class="fa-solid fa-hotdog text-amber-600"></i> Tamaño Jumbo
+          </span>
+          <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide leading-tight drop-shadow-md">
+            Jumbodogs Gourmet
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-200 mt-1 font-medium drop-shadow line-clamp-1">
+            Con tocino crocante, piña asada y abundante queso fundido
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 3: Malteadas -->
+      <div class="hero-slide" data-index="2">
+        <img src="assets/hero_malteada.jpg" alt="Malteadas Cremosas" class="slide-image">
+        <div class="hero-gradient-overlay"></div>
+        <div class="absolute bottom-12 sm:bottom-16 left-4 sm:left-8 z-10 text-white max-w-md">
+          <span class="inline-flex items-center gap-1.5 bg-[#ffda36] text-gray-950 text-[10px] sm:text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-2 tracking-wider shadow-md">
+            <i class="fa-solid fa-ice-cream text-amber-600"></i> Cremosas y Espesas
+          </span>
+          <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide leading-tight drop-shadow-md">
+            Malteadas Artesanales
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-200 mt-1 font-medium drop-shadow line-clamp-1">
+            Oreo, Chocolate, Fresa y Vainilla preparadas al momento
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 4: Alitas & Boneless -->
+      <div class="hero-slide" data-index="3">
+        <img src="assets/hero_alitas.jpg" alt="Alitas y Boneless" class="slide-image">
+        <div class="hero-gradient-overlay"></div>
+        <div class="absolute bottom-12 sm:bottom-16 left-4 sm:left-8 z-10 text-white max-w-md">
+          <span class="inline-flex items-center gap-1.5 bg-[#ffda36] text-gray-950 text-[10px] sm:text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-2 tracking-wider shadow-md">
+            <i class="fa-solid fa-drumstick-bite text-amber-600"></i> Bañadas en Salsa
+          </span>
+          <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide leading-tight drop-shadow-md">
+            Alitas & Boneless
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-200 mt-1 font-medium drop-shadow line-clamp-1">
+            BBQ, Mango Habanero, Tamarindo y salsas a elegir
+          </p>
+        </div>
+      </div>
+
+      <!-- Barra superior sobre el Hero con Logo y Nombre oficial Carboburguer (Limpio, sin icono de info ni ver más) -->
+      <div class="absolute top-0 left-0 right-0 z-20 px-4 sm:px-6 pt-4 pb-2 flex items-center justify-between">
+        
+        <!-- Logo circular + Tipografía original script "Carboburguer" -->
+        <div class="flex items-center gap-2.5 sm:gap-3 cursor-pointer" onclick="openStoreInfoModal()">
+          <div class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-[#ffda36] shadow-[0_4px_16px_rgba(0,0,0,0.6)] bg-[#141414] flex-shrink-0">
+            <img src="assets/logo_circle.png" alt="Carboburguer Logo" class="w-full h-full object-cover">
+          </div>
+          <div class="flex flex-col">
+            <!-- Tipografía original Carboburguer -->
+            <span class="carbo-script-title text-2xl sm:text-3xl">
+              Carboburguer
+            </span>
+            <span class="text-[9px] sm:text-[10px] font-black tracking-[0.22em] text-white/95 uppercase drop-shadow -mt-1">
+              — SINCE 2012 —
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Indicadores de barra inferior de Slides (Progreso en tiempo real) -->
+      <div class="absolute bottom-3 left-4 right-4 z-20 flex items-center gap-2 max-w-xs mx-auto">
+        <div class="slide-indicator-bar flex-1 active" data-index="0">
+          <div class="indicator-progress"></div>
+        </div>
+        <div class="slide-indicator-bar flex-1" data-index="1">
+          <div class="indicator-progress"></div>
+        </div>
+        <div class="slide-indicator-bar flex-1" data-index="2">
+          <div class="indicator-progress"></div>
+        </div>
+        <div class="slide-indicator-bar flex-1" data-index="3">
+          <div class="indicator-progress"></div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. CONTENEDOR PRINCIPAL CON GLASSMORFISMO INTEGRADO
+       ========================================================================= -->
+  <main class="w-full max-w-4xl mx-auto px-4 sm:px-6 relative z-20 pt-4 sm:pt-6 flex-1">
+
+    <!-- =========================================================================
+         APARTADO OFICIAL DE PROMOS: PROMO 3x2 (MIÉRCOLES Y JUEVES)
+         Diseño limpio, claro y fácil de entender
+         ========================================================================= -->
+    <div class="glass-card-dark p-4 sm:p-5 mb-5 text-white shadow-2xl border border-amber-400/35 relative overflow-hidden">
+      <!-- Glow ambiental suave -->
+      <div class="absolute -top-10 -right-10 w-44 h-44 bg-[#f29b00]/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        
+        <!-- Bloque informativo de la Promo 3x2 -->
+        <div class="flex-1">
+          
+          <!-- Píldora de días -->
+          <div class="inline-flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-amber-600 text-white text-[11px] font-black uppercase px-3 py-1 rounded-full tracking-wider shadow-sm mb-2.5">
+            <i class="fa-solid fa-fire text-yellow-300"></i> MIÉRCOLES Y JUEVES
+          </div>
+
+          <!-- Titular 3*2 claro y directo -->
+          <div class="flex items-center gap-3">
+            <span class="text-4xl sm:text-5xl font-black text-[#ffda36] tracking-tight leading-none drop-shadow">
+              3 * 2
+            </span>
+            <div>
+              <h3 class="text-base sm:text-lg font-black uppercase text-white leading-tight">
+                Pagas 2 y te llevas 3
+              </h3>
+              <p class="text-xs text-amber-200/90 font-medium">Aplica en los siguientes productos:</p>
+            </div>
+          </div>
+
+          <!-- Productos participantes organizados en píldoras visuales -->
+          <div class="mt-3 flex flex-wrap gap-2 text-xs font-bold text-gray-200">
+            <span class="bg-white/10 border border-white/15 px-3 py-1.5 rounded-xl flex items-center gap-2">
+              🍔 Hamburguesa de Arrachera y Pollo
+            </span>
+            <span class="bg-white/10 border border-white/15 px-3 py-1.5 rounded-xl flex items-center gap-2">
+              🌭 Hot Dog Jumbo
+            </span>
+            <span class="bg-white/10 border border-white/15 px-3 py-1.5 rounded-xl flex items-center gap-2">
+              🍗 Alitas y Boneless
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Botón directo para pedir la promo por WhatsApp -->
+        <div class="sm:flex-shrink-0">
+          <a 
+            href="https://wa.me/525544211895?text=¡Hola%20Carboburguer!%20Quiero%20pedir%20la%20Promo%203x2%20de%20Miércoles%20y%20Jueves" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto bg-[#25D366] hover:bg-[#1ebd5a] active:scale-95 text-white text-xs sm:text-sm font-black px-5 py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all"
+          >
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>Pedir Promo 3x2</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         3. BARRA HORIZONTAL DE CATEGORÍAS (STICKY GLASSMORFICA)
+         ========================================================================= -->
+    <div class="sticky top-0 z-30 pt-2 pb-3 mb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div id="categories-container" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        <!-- Renderizado dinámico vía app.js con clases .glass-tab -->
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         4. SECCIONES Y TARJETAS DE PRODUCTOS (GLASSMORFISMO - SIN BOTÓN AGREGAR)
+         ========================================================================= -->
+    <div id="menu-sections-container">
+      <!-- Renderizado dinámico vía app.js -->
+    </div>
+
+    <!-- =========================================================================
+         5. PIE DE PÁGINA GLASSMORFISMO CON INFORMACIÓN DE LA EMPRESA & HORARIOS
+         ========================================================================= -->
+    <footer class="mt-8 mb-12 p-6 glass-card text-center">
+      <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#b45309] mx-auto mb-2.5 shadow-md bg-[#141414]">
+        <img src="assets/logo_circle.png" alt="Carboburguer" class="w-full h-full object-cover">
+      </div>
+      
+      <!-- Nombre Carboburguer con tipografía oficial -->
+      <h3 class="carbo-script-title text-2xl sm:text-3xl">
+        Carboburguer
+      </h3>
+      <p class="text-xs text-gray-800 font-bold max-w-sm mx-auto mt-1 italic">
+        "Carboburguer somos tu mejor opción. Ven y compruébalo."
+      </p>
+      
+      <!-- Horarios y Contacto oficial en el pie -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-4 pt-4 border-t border-black/10 text-xs font-bold text-gray-900">
+        <span class="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full border border-white/60 shadow-sm">
+          <i class="fa-solid fa-clock text-[#b45309]"></i> 15:00 a 22:00 hrs
+        </span>
+        <span class="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full border border-white/60 shadow-sm">
+          <i class="fa-brands fa-whatsapp text-emerald-600 font-black"></i> 55 • 4421 • 1895
+        </span>
+        <span class="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full border border-white/60 shadow-sm">
+          <i class="fa-solid fa-shield-halved text-[#b45309]"></i> Desde 2012
+        </span>
+      </div>
+
+      <div class="mt-4">
+        <button onclick="openStoreInfoModal()" class="inline-flex items-center gap-2 bg-white/80 hover:bg-white text-gray-900 text-xs font-black px-4 py-2 rounded-xl border border-white/60 shadow-sm transition-all">
+          <i class="fa-solid fa-circle-info text-[#b45309]"></i>
+          <span>Información de la empresa & promociones</span>
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- =========================================================================
+       6. BOTÓN FLOTANTE REDONDO DE WHATSAPP (CON ONDA PULSANTE)
+       ========================================================================= -->
+  <a 
+    href="https://wa.me/525544211895?text=¡Hola%20Carboburguer!%20Quisiera%20hacer%20un%20pedido%20del%20menú" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="wa-float-btn" 
+    title="Chatear por WhatsApp con Carboburguer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <i class="fa-brands fa-whatsapp text-3xl sm:text-4xl leading-none"></i>
+  </a>
+
+  <!-- =========================================================================
+       7. BARRA FLOTANTE DE PEDIDO (COLIN'S STYLE INFERIOR GLASSMORFICA)
+       ========================================================================= -->
+  <div id="floating-order-bar" class="floating-order-bar">
+    <div class="glass-card-dark text-white p-3.5 shadow-2xl flex items-center justify-between gap-3 cursor-pointer hover:bg-black transition-all" onclick="openCartDrawer()">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-[#ffda36] text-gray-950 font-black flex items-center justify-center text-sm shadow-md">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <div>
+          <span id="floating-cart-count" class="text-xs font-bold block text-gray-200 leading-tight">
+            0 productos
+          </span>
+          <span class="text-[10px] text-[#ffda36] font-bold tracking-wide">
+            Toca para ver orden
+          </span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <span id="floating-cart-total" class="font-black text-base text-[#ffda36]">
+          $0.00
+        </span>
+        <span class="bg-[#ffda36] text-gray-950 text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md">
+          <span>Ver pedido</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       8. BACKDROP GLOBAL PARA MODALES Y DRAWERS
+       ========================================================================= -->
+  <div id="modal-backdrop" class="modal-backdrop fixed inset-0 bg-black/60 backdrop-blur-sm z-50"></div>
+
+  <!-- =========================================================================
+       9. MODAL DE PERSONALIZACIÓN DE PRODUCTO
+       ========================================================================= -->
+  <div id="product-modal" class="modal-sheet fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-lg bg-white rounded-t-3xl md:rounded-3xl shadow-2xl z-50 max-h-[90vh] flex flex-col overflow-hidden">
+    
+    <div class="relative h-48 sm:h-56 w-full flex-shrink-0 bg-gray-950">
+      <img id="modal-item-img" src="assets/carbo_burguer.jpg" alt="Producto" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30"></div>
+      
+      <button onclick="closeProductModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center hover:bg-black transition-colors">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="absolute bottom-3 left-4 right-4 text-white">
+        <div class="flex items-end justify-between">
+          <div>
+            <h3 id="modal-item-title" class="font-black text-lg sm:text-xl uppercase tracking-wide">
+              Carbo Burguer
+            </h3>
+            <p id="modal-item-desc" class="text-xs text-gray-300 font-medium line-clamp-2 mt-0.5">
+              Arrachera, pollo, tocino, piña y queso.
+            </p>
+          </div>
+          <span id="modal-item-price" class="text-xl font-black text-[#ffda36] flex-shrink-0 ml-2">
+            $150.00
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 sm:p-5 overflow-y-auto flex-1">
+      <div id="modal-options-container">
+        <!-- Renderizado dinámico vía app.js -->
+      </div>
+    </div>
+
+    <div class="p-4 bg-gray-50 border-t border-gray-200 flex items-center gap-3">
+      <div class="flex items-center border border-gray-300 rounded-xl bg-white overflow-hidden shadow-sm">
+        <button onclick="changeModalQty(-1)" class="w-10 h-10 flex items-center justify-center text-sm font-bold text-gray-700 hover:bg-gray-100 active:bg-gray-200">
+          -
+        </button>
+        <span id="modal-qty-display" class="w-9 text-center font-black text-sm text-gray-900">
+          1
+        </span>
+        <button onclick="changeModalQty(1)" class="w-10 h-10 flex items-center justify-center text-sm font-bold text-gray-700 hover:bg-gray-100 active:bg-gray-200">
+          +
+        </button>
+      </div>
+
+      <button id="modal-add-btn" onclick="addCurrentItemToCart()" class="flex-1 bg-gray-950 hover:bg-black active:scale-[0.98] text-[#ffda36] font-black py-3 px-4 rounded-xl shadow-md transition-all text-xs sm:text-sm">
+        Agregar al pedido • $150.00
+      </button>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       10. DRAWER DEL CARRITO & CHECKOUT DIRECTO POR WHATSAPP
+       ========================================================================= -->
+  <div id="cart-drawer" class="modal-sheet fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-lg bg-white rounded-t-3xl md:rounded-3xl shadow-2xl z-50 max-h-[92vh] flex flex-col overflow-hidden">
+    
+    <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between bg-white">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-amber-100 text-[#b45309] flex items-center justify-center text-sm">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-sm uppercase tracking-wide text-gray-900">Tu Pedido</h3>
+          <span class="text-[11px] text-[#b45309] font-bold">Carboburguer WhatsApp Directo</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="clearCart()" title="Vaciar carrito" class="text-xs text-gray-400 hover:text-red-500 font-semibold p-1.5">
+          <i class="fa-solid fa-trash-can mr-1"></i> Vaciar
+        </button>
+        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="p-4 sm:p-5 overflow-y-auto flex-1 space-y-3">
+      <div id="cart-items-list" class="space-y-2.5">
+        <!-- Renderizado dinámico vía app.js -->
+      </div>
+
+      <div class="pt-4 mt-4 border-t border-gray-100">
+        <h4 class="text-xs font-black uppercase tracking-wider text-gray-800 mb-2.5 flex items-center gap-1.5">
+          <i class="fa-solid fa-user text-[#b45309]"></i> Datos del Pedido
+        </h4>
+        
+        <div class="space-y-2.5">
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Nombre completo *</label>
+            <input type="text" id="checkout-name" placeholder="Tu nombre" class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f29b00] outline-none">
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Teléfono WhatsApp</label>
+            <input type="tel" id="checkout-phone" placeholder="Ej: 55 1234 5678" class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f2ad00] outline-none">
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Dirección de entrega o notas (opcional)</label>
+            <textarea id="checkout-address" rows="2" placeholder="Dirección para entrega o detalles del pedido..." class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f2ad00] outline-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Forma de pago</label>
+            <select id="checkout-payment" class="w-full text-xs p-2.5 border border-gray-300 rounded-xl focus:border-[#f2ad00] outline-none bg-white">
+              <option value="Efectivo">Efectivo</option>
+              <option value="Transferencia electrónica">Transferencia electrónica</option>
+              <option value="Tarjeta (Terminal)">Tarjeta</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="p-4 bg-gray-50 border-t border-gray-200">
+      <div class="flex justify-between text-sm mb-3 font-black text-gray-950">
+        <span>TOTAL A PAGAR:</span>
+        <span id="cart-summary-total" class="text-base text-[#b45309] font-black">$0.00</span>
+      </div>
+
+      <button id="cart-checkout-btn" onclick="sendOrderToWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#1ebd5a] active:scale-[0.98] text-white font-black py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-xs sm:text-sm">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>Enviar Pedido por WhatsApp</span>
+      </button>
+      <p class="text-[10px] text-gray-500 text-center mt-1.5 font-medium">
+        Se abrirá tu WhatsApp con el detalle listo para enviar a Carboburguer.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       11. MODAL DE INFORMACIÓN DE LA EMPRESA ("VER MÁS" - REF. IMAGEN 2 & 3)
+       ========================================================================= -->
+  <div id="store-info-modal" class="modal-sheet fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-md bg-white rounded-t-3xl md:rounded-3xl shadow-2xl z-50 max-h-[90vh] flex flex-col overflow-hidden">
+    
+    <div class="relative h-44 bg-[#141414] flex items-center justify-center overflow-hidden">
+      <img src="assets/carboburguer_emblem.png" alt="Carboburguer Letrero" class="w-full h-full object-contain p-3">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+      
+      <button onclick="closeStoreInfoModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <span class="absolute bottom-2 left-4 text-xs font-black text-[#ffda36] tracking-wider uppercase">
+        — SINCE 2012 —
+      </span>
+    </div>
+
+    <div class="p-5 overflow-y-auto space-y-4">
+      
+      <div class="flex items-center gap-3 pb-3 border-b border-gray-100">
+        <img src="assets/logo_circle.png" alt="Sucursal" class="w-12 h-12 rounded-full border-2 border-[#b45309] object-cover bg-gray-900">
+        <div>
+          <!-- Nombre con tipografía oficial -->
+          <h3 class="carbo-script-title text-xl">carboburguer</h3>
+          <p class="text-xs text-gray-600 font-medium italic mt-0.5">
+            "carboburguer somos tu mejor opción. Ven y compruébalo."
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 text-xs">
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-lg bg-amber-100 text-[#b45309] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 block">Horario de Servicio</span>
+            <span class="text-gray-600">Lunes a Domingo: 15:00 a 22:00 hrs.</span>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 block">WhatsApp de Pedidos</span>
+            <a href="https://wa.me/525544211895" target="_blank" class="text-emerald-700 font-black hover:underline">
+              55 • 4421 • 1895
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Políticas y Promociones Carbo con Promo 3x2 -->
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 text-xs text-amber-950 space-y-2">
+        <p class="font-black flex items-center gap-1.5 text-[#b45309]">
+          <i class="fa-solid fa-fire text-red-600"></i> Promociones Oficiales Carbo
+        </p>
+        <div class="p-2 bg-white/80 rounded-xl border border-amber-300">
+          <span class="font-black text-red-600 block">⭐ PROMO 3*2 (Miércoles y Jueves):</span>
+          <span class="text-[11px] text-gray-800">En Hamburguesas de arrachera y pollo, Hot Dog Jumbo, Alitas y Boneless.</span>
+        </div>
+        <p class="text-[11px]">• Puedes cambiar tu tocino y piña por champiñones sin costo adicional.</p>
+        <p class="text-[11px]">• Por $30 pesos más cualquier producto puede llevar una porción de papas.</p>
+        <p class="text-[11px]">• Agrega carne extra a tu hamburguesa por $30 pesos.</p>
+      </div>
+
+      <div class="pt-2">
+        <a href="https://wa.me/525544211895?text=Hola%20Carboburguer,%20tengo%20una%20duda%20sobre%20el%20menú" target="_blank" class="w-full bg-[#25D366] hover:bg-[#1ebd5a] text-white font-black py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Enviar mensaje directo a la empresa</span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       12. TOAST FLOTANTE DE NOTIFICACIONES
+       ========================================================================= -->
+  <div id="toast-notice" class="toast-notice bg-gray-950 text-white px-4 py-2.5 rounded-2xl shadow-2xl border border-[#ffda36]/40 flex items-center gap-2 text-xs font-bold">
+    <i class="fa-solid fa-circle-check text-[#ffda36]"></i>
+    <span id="toast-text">Producto agregado con éxito</span>
+  </div>
+
+  <!-- JavaScript Principal -->
+  <script src="app.js"></script>
+</body>
+</html>

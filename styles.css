@@ -1,0 +1,480 @@
+/* ==========================================================================
+   CARBOBURGUER - MENÚ DIGITAL
+   Identidad Fiel: Fondo Naranja #f29b00 + Glassmorphism Premium
+   ========================================================================== */
+
+:root {
+  --carbo-primary: #f29b00;
+  --carbo-primary-hover: #d99b00;
+  --carbo-primary-light: #fff8e6;
+  --carbo-dark: #121212;
+  --carbo-charcoal: #1c1c1c;
+  
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.86);
+  --glass-bg-hover: rgba(255, 255, 255, 0.96);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 10px 30px -4px rgba(138, 75, 4, 0.16), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fondo principal en el naranja oficial #f29b00 con sutil degradado y calidez */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f29b00;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(255, 205, 75, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(217, 119, 6, 0.35) 0%, transparent 50%),
+    linear-gradient(180deg, #f29b00 0%, #e68f00 40%, #d48200 100%);
+  background-attachment: fixed;
+  color: #1a1a1a;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA Y COLOR OFICIAL "CARBOBURGUER" (ESTILO RÓTULO ORIGINAL)
+   ========================================================================== */
+.carbo-script-title {
+  font-family: 'Pacifico', cursive;
+  color: #ffda36;
+  -webkit-text-stroke: 1.2px #b45309;
+  text-shadow: 
+    0 2px 0 #92400e,
+    0 3px 0 #78350f,
+    0 4px 8px rgba(0, 0, 0, 0.55);
+  line-height: 1.15;
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
+.carbo-script-title-large {
+  font-family: 'Pacifico', cursive;
+  color: #ffe043;
+  -webkit-text-stroke: 1.8px #b45309;
+  text-shadow: 
+    0 2px 0 #92400e,
+    0 4px 0 #78350f,
+    0 6px 14px rgba(0, 0, 0, 0.65);
+  line-height: 1.1;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   GLASSMORFISM (TARJETAS CRISTALINAS INTEGRADAS)
+   ========================================================================== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 22px;
+}
+
+.glass-card-dark {
+  background: rgba(22, 22, 24, 0.88);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border-radius: 22px;
+}
+
+.glass-product-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px -3px rgba(161, 80, 5, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+
+.glass-product-card:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 32px -4px rgba(146, 64, 14, 0.24);
+}
+
+.glass-product-card:active {
+  transform: scale(0.99);
+}
+
+/* Pestañas de categoría Glassmorphism */
+.glass-tab {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 8px 14px;
+  color: #27272a;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.22s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.glass-tab i {
+  font-size: 18px;
+  transition: transform 0.22s ease;
+}
+
+.glass-tab:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111827;
+  transform: translateY(-1px);
+}
+
+.glass-tab.active {
+  background: #18181b;
+  color: #f29b00;
+  border-color: #f29b00;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.glass-tab.active i {
+  transform: scale(1.15);
+  color: #f29b00;
+}
+
+/* Scrollbar invisible para categorías horizontales */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   HERO SLIDESHOW CON ANIMACIÓN DINÁMICA KEN BURNS (FOTOS LIMPIAS SIN FILTRO AMARILLO)
+   Hamburguesa -> Hotdog -> Malteadas -> Alitas -> Hamburguesa
+   ========================================================================== */
+.hero-slider-container {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background-color: #0d0d0d;
+}
+
+@media (min-width: 640px) {
+  .hero-slider-container {
+    height: 440px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-slider-container {
+    height: 470px;
+  }
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.hero-slide .slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  will-change: transform;
+}
+
+.hero-slide.active:nth-child(1) .slide-image {
+  animation: kenBurnsZoomIn 6s ease-out forwards;
+}
+
+.hero-slide.active:nth-child(2) .slide-image {
+  animation: kenBurnsPanRight 6s ease-out forwards;
+}
+
+.hero-slide.active:nth-child(3) .slide-image {
+  animation: kenBurnsZoomInCenter 6s ease-out forwards;
+}
+
+.hero-slide.active:nth-child(4) .slide-image {
+  animation: kenBurnsPanLeft 6s ease-out forwards;
+}
+
+@keyframes kenBurnsZoomIn {
+  0% { transform: scale(1.0) translate(0, 0); }
+  100% { transform: scale(1.15) translate(-1.5%, -1%); }
+}
+
+@keyframes kenBurnsPanRight {
+  0% { transform: scale(1.12) translate(-2%, 1%); }
+  100% { transform: scale(1.02) translate(1.5%, -1%); }
+}
+
+@keyframes kenBurnsZoomInCenter {
+  0% { transform: scale(1.0) translate(0, 1%); }
+  100% { transform: scale(1.14) translate(0, -1.5%); }
+}
+
+@keyframes kenBurnsPanLeft {
+  0% { transform: scale(1.12) translate(2%, -1%); }
+  100% { transform: scale(1.02) translate(-1.5%, 1%); }
+}
+
+/* Sombra sutil para texto en cabecera y pie sin filtro de color invasivo */
+.hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.72) 0%,
+    rgba(10, 10, 10, 0.05) 30%,
+    rgba(10, 10, 10, 0.05) 60%,
+    rgba(10, 10, 10, 0.75) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Indicadores de slides */
+.slide-indicator-bar {
+  position: relative;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.slide-indicator-bar.active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.slide-indicator-bar.active .indicator-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: #ffda36;
+  box-shadow: 0 0 10px #ffda36;
+  animation: progressFill 5s linear forwards;
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Imagen del producto */
+.product-img-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #f3f4f6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 640px) {
+  .product-img-wrapper {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+.product-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.glass-product-card:hover .product-img-wrapper img {
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE REDONDO DE WHATSAPP (CON ONDA PULSANTE)
+   ========================================================================== */
+.wa-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  background: #25D366;
+  color: #ffffff;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5), 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 45;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+@media (min-width: 640px) {
+  .wa-float-btn {
+    width: 64px;
+    height: 64px;
+    bottom: 28px;
+    right: 28px;
+  }
+}
+
+.wa-float-btn:hover {
+  transform: scale(1.12);
+  background: #20ba59;
+  box-shadow: 0 14px 30px rgba(37, 211, 102, 0.6);
+}
+
+.wa-float-btn:active {
+  transform: scale(0.95);
+}
+
+.wa-float-btn::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 9999px;
+  background: rgba(37, 211, 102, 0.45);
+  z-index: -1;
+  animation: waPulse 2.2s infinite;
+}
+
+@keyframes waPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Barra flotante inferior de Pedido */
+.floating-order-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  width: calc(100% - 32px);
+  max-width: 460px;
+  z-index: 40;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floating-order-bar.visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Modales y Drawers con Glassmorphism */
+.modal-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-sheet {
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.modal-sheet.active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .modal-sheet {
+    transform: scale(0.95) translateY(20px);
+    opacity: 0;
+    transition: all 0.25s ease;
+  }
+  .modal-sheet.active {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Estilo para las opciones de selección en el modal */
+.custom-option-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-option-label:hover {
+  border-color: #f29b00;
+  background-color: #fffdf5;
+}
+
+.custom-option-input:checked + .custom-option-label {
+  border-color: #f29b00;
+  background-color: #fffaf0;
+  box-shadow: 0 0 0 1.5px #f29b00;
+}
+
+/* Toast flotante */
+.toast-notice {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  z-index: 60;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+}
