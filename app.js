@@ -17,6 +17,7 @@ const MENU_DATA = [
         id: "hb-carbo",
         name: "Carbo Burguer",
         price: 150,
+        priceDoble: 180,
         desc: "Arrachera, pollo, tocino, piña asada y queso manchego fundido.",
         img: "assets/carbo_burguer.jpg",
         badge: "⭐ La Especialidad",
@@ -27,6 +28,7 @@ const MENU_DATA = [
         id: "hb-monster",
         name: "Carbo Monster",
         price: 130,
+        priceDoble: 160,
         desc: "Arrachera, pastor, tocino, piña asada y queso manchego fundido.",
         img: "assets/carbo_monster.jpg",
         badge: "🔥 Más Pedida",
@@ -37,6 +39,7 @@ const MENU_DATA = [
         id: "hb-mixta",
         name: "Carbo Mixta",
         price: 130,
+        priceDoble: 160,
         desc: "Pastor, pollo, tocino, piña asada y queso derretido.",
         img: "assets/carbo_mixta.jpg",
         type: "burger"
@@ -45,6 +48,7 @@ const MENU_DATA = [
         id: "hb-angus",
         name: "Carbo Angus",
         price: 130,
+        priceDoble: 160,
         desc: "Carne 100% Angus selecta, tocino crocante, piña y queso.",
         img: "assets/carbo_angus.jpg",
         type: "burger"
@@ -63,6 +67,7 @@ const MENU_DATA = [
         id: "hb-extreme",
         name: "Carbo Extreme",
         price: 130,
+        priceDoble: 160,
         desc: "Sirloin, salchicha asada, tocino, piña y queso derretido.",
         img: "assets/carbo_extreme.jpg",
         type: "burger"
@@ -71,6 +76,7 @@ const MENU_DATA = [
         id: "hb-sirloin",
         name: "Carbo Sirloin",
         price: 100,
+        priceDoble: 130,
         desc: "Corte de sirloin jugoso, tocino, piña y queso manchego.",
         img: "assets/carbo_sirloin.jpg",
         type: "burger"
@@ -79,6 +85,7 @@ const MENU_DATA = [
         id: "hb-arrachera",
         name: "Carbo Arrachera",
         price: 130,
+        priceDoble: 160,
         desc: "Arrachera marinada a la brasa, tocino, piña y queso.",
         img: "assets/carbo_arrachera.jpg",
         type: "burger"
@@ -87,6 +94,7 @@ const MENU_DATA = [
         id: "hb-pastor",
         name: "Carbo Pastor",
         price: 100,
+        priceDoble: 130,
         desc: "Tradicional carne al pastor sazonada, tocino, piña y queso.",
         img: "assets/carbo_pastor.jpg",
         type: "burger"
@@ -95,6 +103,7 @@ const MENU_DATA = [
         id: "hb-res",
         name: "Carbo Res",
         price: 100,
+        priceDoble: 130,
         desc: "Carne de res artesanal a las brasas, tocino, piña y queso.",
         img: "assets/carbo_res.jpg",
         type: "burger"
@@ -103,6 +112,7 @@ const MENU_DATA = [
         id: "hb-crunch",
         name: "Carbo Crunch (Pollo)",
         price: 100,
+        priceDoble: 130,
         desc: "Pechuga de pollo crujiente empanizada, tocino, piña y queso.",
         img: "assets/carbo_crunch.jpg",
         type: "burger"
@@ -532,9 +542,26 @@ function renderMenuSections() {
             ${item.desc}
           </p>
           <div class="mt-2.5">
-            <span class="text-base sm:text-lg font-black text-[#b45309]">
-              $${item.price.toFixed(2)}
-            </span>
+            ${item.priceDoble ? `
+              <div class="flex items-center gap-2 flex-wrap">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-base sm:text-lg font-black text-[#b45309]">
+                    $${item.price.toFixed(2)}
+                  </span>
+                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-950/70">
+                    Sencilla
+                  </span>
+                </div>
+                <div class="inline-flex items-center gap-1 bg-amber-950/10 px-2 py-0.5 rounded-md border border-amber-950/10">
+                  <span class="text-[10px] font-bold uppercase text-amber-950/70">Doble</span>
+                  <span class="text-xs sm:text-sm font-black text-gray-950">$${item.priceDoble.toFixed(2)}</span>
+                </div>
+              </div>
+            ` : `
+              <span class="text-base sm:text-lg font-black text-[#b45309]">
+                $${item.price.toFixed(2)}
+              </span>
+            `}
           </div>
         </div>
         <div class="product-img-wrapper">
@@ -616,7 +643,21 @@ function openProductModal(itemId) {
   if (modalImg) modalImg.src = item.img;
   if (modalTitle) modalTitle.textContent = item.name;
   if (modalDesc) modalDesc.textContent = item.desc;
-  if (modalPrice) modalPrice.textContent = `$${item.price.toFixed(2)}`;
+  if (modalPrice) {
+    if (item.priceDoble) {
+      modalPrice.innerHTML = `
+        <div class="flex items-baseline justify-end gap-1.5">
+          <span class="text-xl sm:text-2xl font-black text-[#ffda36]">$${item.price.toFixed(2)}</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-white/90 bg-white/15 px-1.5 py-0.5 rounded">Sencilla</span>
+        </div>
+        <div class="text-xs sm:text-sm font-bold text-amber-200 mt-0.5 text-right">
+          Doble: <span class="font-black text-white">$${item.priceDoble.toFixed(2)}</span>
+        </div>
+      `;
+    } else {
+      modalPrice.innerHTML = `<span class="text-xl sm:text-2xl font-black text-[#ffda36]">$${item.price.toFixed(2)}</span>`;
+    }
+  }
 
   let optionsHtml = "";
 
@@ -636,10 +677,12 @@ function openProductModal(itemId) {
             <i class="fa-solid fa-plus-circle text-[#b45309]"></i> Opciones disponibles al ordenar:
           </h5>
           <ul class="text-xs text-gray-700 space-y-1 font-medium">
-            <li class="flex items-center justify-between">
-              <span>• Doble Carne a la Parrilla</span>
-              <span class="font-bold text-[#b45309]">+$30.00</span>
-            </li>
+            ${item.priceDoble ? `
+              <li class="flex items-center justify-between">
+                <span>• Versión Doble (+1 carne extra a la brasa)</span>
+                <span class="font-bold text-[#b45309]">$${item.priceDoble.toFixed(2)} (+$30.00)</span>
+              </li>
+            ` : ""}
             <li class="flex items-center justify-between">
               <span>• Porción de Papas Fritas</span>
               <span class="font-bold text-[#b45309]">+$30.00</span>
